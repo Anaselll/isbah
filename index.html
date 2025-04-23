@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>École Isbah El Jadida</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    header {
+      background-color: #fff;
+      padding: 15px 5%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 40px;
+      margin-right: 10px;
+    }
+
+    .logo span {
+      font-size: 20px;
+      font-weight: bold;
+      color: #c62828;
+    }
+
+    nav {
+      transition: all 0.3s ease;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li {
+      margin-left: 30px;
+      position: relative;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+      font-weight: 500;
+      position: relative;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #c62828;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #c62828;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .active {
+      color: #c62828;
+    }
+
+    .active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #c62828;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('bg.jpg') center/cover no-repeat;
+      background-color: rgba(0, 0, 0, 0.5);
+      background-blend-mode: overlay;
+      text-align: center;
+      padding: 2rem;
+      color: #fff;
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px 25px;
+      border-radius: 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 15px 25px;
+      border-radius: 8px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin-top: 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #388e3c;
+    }
+
+    .mission {
+      padding: 50px 5%;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .mission h2 {
+      font-size: 30px;
+      color: #c62828;
+      margin-bottom: 20px;
+    }
+
+    .mission p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 16px;
+    }
+
+    .features {
+      padding: 50px 5%;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-size: 30px;
+      color: #c62828;
+      margin-bottom: 20px;
+    }
+
+    .feature-card {
+      background-color: #fff;
+      width: 30%;
+      display: inline-block;
+      margin: 1%;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+    }
+
+    .icon {
+      font-size: 40px;
+      color: #4caf50;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 30px 5%;
+      text-align: center;
+    }
+
+    .footer-content {
+      margin-bottom: 20px;
+    }
+
+    .footer-content div {
+      display: inline-block;
+      width: 30%;
+      vertical-align: top;
+      margin: 1%;
+    }
+
+    .footer-content h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .footer-content p, .footer-content a {
+      font-size: 14px;
+      color: #fff;
+      text-decoration: none;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .footer-content a:hover {
+      color: #4caf50;
+    }
+
+    .copyright {
+      font-size: 14px;
+      padding-top: 20px;
+      border-top: 1px solid #555;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav.open {
+        max-height: 300px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        padding: 20px 0;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      nav a {
+        display: block;
+        padding: 10px;
+      }
+
+      .hero {
+        height: 80vh;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .feature-card {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .footer-content div {
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="École Isbah El Jadida Logo">
+      <span>École Isbah El Jadida</span>
+    </div>
+    <button class="menu-toggle">☰</button>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Bienvenue à l'École Isbah El Jadida</h1>
+    <p>Nous formons les esprits de demain avec excellence et bienveillance.</p>
+    <a href="about.html" class="cta-button">En savoir plus</a>
+  </section>
+
+  <section class="mission">
+    <h2>Notre Mission</h2>
+    <p>À l'École Isbah El Jadida, nous offrons une éducation complète pour préparer des citoyens responsables et ouverts sur le monde.</p>
+  </section>
+
+  <section class="features">
+    <h2>Pourquoi Nous Choisir</h2>
+    <div class="feature-card">
+      <div class="icon">📚</div>
+      <h3>Excellence Académique</h3>
+      <p>Programmes conçus pour encourager la curiosité et la réflexion.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🌍</div>
+      <h3>Éducation Bilingue</h3>
+      <p>Enseignement en arabe et français pour une ouverture culturelle.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🏅</div>
+      <h3>Activités Variées</h3>
+      <p>Activités artistiques et sportives pour un développement complet.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h3>À Propos</h3>
+       <p>El Jadida, Maroc</p>
+        <p>Tél: +212 5XX-XXXXXX</p>
+        <p>Email: contact@ecoleisbah.ma</p>
+      </div>
+      <div>
+        <h3>Liens</h3>
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À propos</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h3>Suivez-nous</h3>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 École Isbah El Jadida. Tous droits réservés.
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
